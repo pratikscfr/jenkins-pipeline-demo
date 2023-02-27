@@ -7,15 +7,20 @@ pipeline {
                 echo 'Build World'
             }
         }
-	stage('Test') {
+		stage('Test') {
             steps {
                 echo 'Test World'
             }
         }
-	stage('Deploy') {
+		stage('Deploy') {
             steps {
                 echo 'Deploy World'
             }
         }
+		stage('Build Hello-World') {
+			steps {
+				build 'Hello-World'
+			}
+		}
     }
 }
