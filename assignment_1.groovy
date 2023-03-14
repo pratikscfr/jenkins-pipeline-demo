@@ -26,6 +26,7 @@ pipeline {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
                     }
                 }
+            }
         } // Do we only mean build a downstream job/pipeline when we say call another pieline ?
     }
 	    
