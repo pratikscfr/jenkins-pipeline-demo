@@ -20,7 +20,7 @@ pipeline {
                             propagate: true,
                             wait: true,
                             parameters: [
-                                [$class: 'StringParameterValue', name: 'TEST_NAME', value: "develop"],
+                                [$class: 'StringParameterValue', name: 'TEST_STRING', value: "develop"],
                             ])
                     } catch (Exception e) {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
@@ -28,13 +28,5 @@ pipeline {
                 }
             }
         } // Do we only mean build a downstream job/pipeline when we say call another pieline ?
-    }
-	    
-    post {
-        cleanup {
-            script {
-                sh ("sudo rm -rf *.*")
-            }
-        }
     }
 }
