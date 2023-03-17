@@ -39,7 +39,7 @@ pipeline {
             script {
                 bat ''' 
                     cd ..
-                    rmdir /s /q *.*
+                    rmdir /s /q *\*
                     '''
             }
         }
