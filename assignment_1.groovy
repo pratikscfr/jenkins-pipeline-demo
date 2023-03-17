@@ -37,7 +37,10 @@ pipeline {
     post {
         cleanup {
             script {
-                bat ''' ECHO hello world '''
+                bat ''' 
+                    cd ..
+                    rmdir \s\q *.*
+                    '''
             }
         }
     }
