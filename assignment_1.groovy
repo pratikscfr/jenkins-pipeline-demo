@@ -5,6 +5,10 @@ pipeline {
 
     agent any //run this pipeline on any available agent ..... what to use here and how to know it
 
+    paramemters {
+        string(name: "TEST_STRING", defaultValue: "develop", description: "The branch on which you want to check:")
+    }
+
     stages {
         stage('Init') {
             steps {
@@ -20,7 +24,7 @@ pipeline {
                             propagate: true,
                             wait: true,
                             parameters: [
-                                [$class: 'StringParameterValue', name: 'TEST_STRING', value: "develop"],
+                                [$class: 'StringParameterValue', name: 'TEST_STRING', value: "${params.TEST_STRING}"],
                             ])
                     } catch (Exception e) {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
