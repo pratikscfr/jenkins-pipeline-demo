@@ -5,7 +5,7 @@ pipeline {
 
     agent any //run this pipeline on any available agent ..... what to use here and how to know it
 
-    paramemters {
+    parameters {
         string(name: "TEST_STRING", defaultValue: "develop", description: "The branch on which you want to check:")
     }
 
