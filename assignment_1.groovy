@@ -33,4 +33,12 @@ pipeline {
             }
         } // Do we only mean build a downstream job/pipeline when we say call another pieline ?
     }
+
+    post {
+        cleanup {
+            script {
+                bat ''' ECHO hello world '''
+            }
+        }
+    }
 }
