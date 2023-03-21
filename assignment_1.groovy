@@ -44,7 +44,7 @@ pipeline {
                         grep multiuser input/output/*.txt
                         '''
                         grep_result = sh (
-                            script: 'grep useful input/output/*.txt',
+                            script: 'grep \'Revpro URL\' input/output/*.txt',
                             returnStdout: true
                         )
 
