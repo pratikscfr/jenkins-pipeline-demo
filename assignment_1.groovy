@@ -41,6 +41,7 @@ pipeline {
                 script {
                     try {
                         sh("echo 'Hello World'")
+                        sh("cat input/usefulfile.txt")
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
