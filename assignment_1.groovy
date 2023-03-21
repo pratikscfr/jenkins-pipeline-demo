@@ -16,6 +16,20 @@ pipeline {
             }
         } // End of 'Init'
 
+        stage('Call ReadWritePipeline') {
+            steps {
+                script {
+                    try {
+                        def read_write_build = build(job: "ReadWritePipeline",
+                            propagate: true,
+                            wait: true)
+                    } catch (Exception e) {
+                        'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
+                    }
+                }
+            }
+        }
+
         stage('Call pipeline_1') {
             steps {
                 script {
