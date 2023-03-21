@@ -13,7 +13,8 @@ pipeline {
         stage('Init') {
             steps {
                 echo "Initializing Pipeline"
-                sh "mkdir -p input"
+                sh "mkdir -p input
+                ls -l"
             }
         } // End of 'Init'
 
