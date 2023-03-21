@@ -40,10 +40,14 @@ pipeline {
             steps {
                 script {
                     try {
-                        def var = sh '''
+                        sh '''
                         grep multiuser input/output/*.txt
                         '''
-                        sh "echo $var"
+                        grep_result = sh (
+                            script: 'grep useful input/output/*.txt',
+                            returnStdout: true
+                        )
+                        echo "grep result: ${grep_result}"
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
