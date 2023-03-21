@@ -13,6 +13,7 @@ pipeline {
         stage('Init') {
             steps {
                 echo "Initializing Pipeline"
+                sh "mkdir -p input"
             }
         } // End of 'Init'
 
@@ -24,8 +25,9 @@ pipeline {
                             propagate: true,
                             wait: true)
                         copyArtifacts(projectName: "ReadWritePipeline", 
-                            selector: specific("${read_write_build.number}")
-                            );
+                            selector: specific("${read_write_build.number}"),
+                            filter: "output/*.txt",
+                            target: "input");
                     } catch (Exception e) {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
                     }
@@ -37,6 +39,7 @@ pipeline {
             steps {
                 script {
                     try {
+                        def var = sh "grep 'unix' input/*.txt"
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
