@@ -47,7 +47,12 @@ pipeline {
                             script: 'grep useful input/output/*.txt',
                             returnStdout: true
                         )
-                        echo "grep result: ${grep_result}"
+
+                        grep_result_array = []
+                        grep_result.split().each {
+                            grep_result_array << it
+                        }
+                        echo "grep result: ${grep_result_array}"
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
