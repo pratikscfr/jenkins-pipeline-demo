@@ -42,7 +42,7 @@ pipeline {
                     try {
                         def var = sh '''
                                     cd input
-                                    grep \"unix\" *.txt
+                                    grep \'unix\' *.txt
                                     '''
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
