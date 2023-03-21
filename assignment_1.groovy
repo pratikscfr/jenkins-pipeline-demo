@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh("grep unix input/.*txt")
+                        sh('grep unix input/.*txt')
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
