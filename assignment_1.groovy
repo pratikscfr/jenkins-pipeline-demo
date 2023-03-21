@@ -43,7 +43,7 @@ pipeline {
                         def var = sh '''
                         grep multiuser input/output/*.txt
                         '''
-                        echo $var
+                        sh "echo $var"
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
