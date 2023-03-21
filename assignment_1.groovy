@@ -37,11 +37,7 @@ pipeline {
     post {
         cleanup {
             script {
-                bat ''' 
-                    cd ..
-                    echo %cd%
-                    rmdir /s /q .
-                    '''
+                sh ("sudo rm -rf *.*")
             }
         }
     }
