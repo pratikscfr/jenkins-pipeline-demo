@@ -23,6 +23,9 @@ pipeline {
                         def read_write_build = build(job: "ReadWritePipeline",
                             propagate: true,
                             wait: true)
+                        copyArtifacts(projectName: "ReadWritePipeline", 
+                            selector: specific("${read_write_build.number}"),
+                            filter: "artifact/output/*.txt");
                     } catch (Exception e) {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
                     }
@@ -34,7 +37,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        def self_service_build = build(job: "TestPipeline1",
+                        def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
                             parameters: [
