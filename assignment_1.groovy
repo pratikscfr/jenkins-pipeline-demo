@@ -53,6 +53,7 @@ pipeline {
                             grep_result_array << it
                         }
                         echo "grep result: ${grep_result_array}"
+                        echo "grep result: ${grep_result_array[3]}"
                         def test_pipeline_build = build(job: "TestPipeline1",
                             propagate: true,
                             wait: true,
