@@ -42,7 +42,10 @@ pipeline {
                     try {
                         sh '''
                         echo 'Hello World'
-                        cd input
+                        cd input/
+                        pwd
+                        ls -l
+                        cd output/
                         pwd
                         ls -l
                         '''
