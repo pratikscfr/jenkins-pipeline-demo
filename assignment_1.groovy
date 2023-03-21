@@ -35,9 +35,19 @@ pipeline {
     }
 
     post {
-        cleanup {
+        always {
             script {
-                sh ("sudo rm -rf *.*")
+                echo 'Printing'
+            }
+        }
+        success {
+            script {
+                echo 'Success'
+            }
+        }
+        failure {
+            script {
+                echo 'Failed'
             }
         }
     }
