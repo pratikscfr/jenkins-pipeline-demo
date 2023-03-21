@@ -24,8 +24,8 @@ pipeline {
                             propagate: true,
                             wait: true)
                         copyArtifacts(projectName: "ReadWritePipeline", 
-                            selector: specific("${read_write_build.number}"),
-                            filter: "artifact/output/*.txt");
+                            selector: specific("${read_write_build.number}")
+                            );
                     } catch (Exception e) {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
                     }
