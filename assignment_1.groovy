@@ -58,7 +58,7 @@ pipeline {
                             propagate: true,
                             wait: true,
                             parameters: [
-                                [$class: 'StringParameterValue', name: 'TEST_STRING', value: "${params.TEST_STRING}"],
+                                [$class: 'StringParameterValue', name: 'TEST_STRING', value: "${params.TEST_STRING},TEST"],
                             ])
                     } catch (Exception e) {
                         'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
@@ -82,6 +82,11 @@ pipeline {
         failure {
             script {
                 echo 'Failed'
+            }
+        }
+        cleanup {
+            script {
+                sh ("sudo rm -rf *.*")
             }
         }
     }
