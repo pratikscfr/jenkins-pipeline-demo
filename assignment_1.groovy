@@ -31,7 +31,7 @@ pipeline {
                             filter: "output/*.txt",
                             target: "input");
                     } catch (Exception e) {
-                        'error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)'
+                        error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)
                     }
                 }
             }
