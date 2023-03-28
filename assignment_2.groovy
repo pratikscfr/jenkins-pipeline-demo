@@ -26,7 +26,7 @@ pipeline {
                 writeFile file: "output/uselessfile.md", text: "This file is useless, no need to archive it."
                 
                 // Purposefully creating a error
-                echo = "This should fail"
+                sh 'sudo ls -l'
             }
         }
 
