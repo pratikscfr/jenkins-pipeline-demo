@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                     try {
+                        echo "------------------START----------------"
                         def read_write_build = build(job: "ReadWritePipeline",
                             propagate: true,
                             wait: true)
@@ -86,7 +87,7 @@ pipeline {
         }
         cleanup {
             script {
-                sh ("sudo rm -rf *.*")
+                sh ("rm -rf *.*")
             }
         }
     }
