@@ -37,11 +37,13 @@ pipeline {
             }
         }
 
-        stage('') {
+        stage('Test.py test') {
             steps {
                 script {
                     try {
                         sh('python test.py')
+                    } catch (Exception e) {
+                        error ("Fatal")
                     }
                 }
             }
