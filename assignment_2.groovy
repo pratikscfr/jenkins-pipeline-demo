@@ -3,37 +3,103 @@ pipeline {
         timestamps()
     }
 
-    agent any
+    agent any //run this pipeline on any available agent ..... what to use here and how to know it
+
+    parameters {
+        string(name: "TEST_STRING", defaultValue: "develop", description: "The branch on which you want to check:")
+    }
 
     stages {
-
         stage('Init') {
             steps {
-                echo 'Init'
+                echo "Initializing Pipeline"
+                sh "mkdir -p input"
+                sh "ls -l"
+            }
+        } // End of 'Init'
+
+        stage('Call ReadWritePipeline') {
+            steps {
+                script {
+                    try {
+                        echo "------------------START----------------"
+                        def read_write_build = build(job: "ReadWritePipeline",
+                            propagate: true,
+                            wait: true)
+                        copyArtifacts(projectName: "ReadWritePipeline", 
+                            selector: specific("${read_write_build.number}"),
+                            filter: "output/*.txt",
+                            target: "input");
+                    } catch (Exception e) {
+                        error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)
+                    }
+                }
             }
         }
 
-        stage('Create build output') {
+        stage('Test.py test') {
             steps {
-                // Make the output directory.
-                sh "mkdir -p output"
-
-                // Write an useful file, which is needed to be archived.
-                writeFile file: "output/usefulfile.txt", text: '''This file is useful, need to archive it.\nunix is great os.\nunix was developed in Bell labs.\nlearn operating system.\nUnix linux which one you choose.\nuNix is easy to learn.unix is a multiuser os.Learn unix .unix is a powerful.\nRevpro URL           : revpro-m-d202303202307.revpro.cloud
-'''
-
-                // Write an useless file, which is not needed to be archived.
-                writeFile file: "output/uselessfile.md", text: "This file is useless, no need to archive it."
-                
-                // Purposefully creating a error
-                // sh 'sudo ls -l'
+                script {
+                    try {
+                        sh('python3 test.py')
+                    } catch (Exception e) {
+                        error ("Fatal")
+                    }
+                }
             }
         }
 
-        stage('Archive build output') {
+        stage('Call pipeline_1') {
             steps {
-                // Archive the build output artifacts.
-                archiveArtifacts artifacts: 'output/*.txt', excludes: 'output/*.md'
+                script {
+                    try {
+                        sh '''
+                        grep multiuser input/output/*.txt
+                        '''
+                        grep_result = sh (
+                            script: 'grep \'Revpro URL\' input/output/*.txt',
+                            returnStdout: true
+                        )
+
+                        grep_result_array = []
+                        grep_result.split().each {
+                            grep_result_array << it
+                        }
+                        echo "grep result: ${grep_result_array}"
+                        echo "grep result: ${grep_result_array[3]}"
+                        def test_pipeline_build = build(job: "TestPipeline1",
+                            propagate: true,
+                            wait: true,
+                            parameters: [
+                                [$class: 'StringParameterValue', name: 'TEST_STRING', value: "${params.TEST_STRING},TEST"],
+                            ])
+                    } catch (Exception e) {
+                        error ("FATAL:: Ran into an issue while Running job. Error: " + e.message)
+                    }
+                }
+            }
+        } // Do we only mean build a downstream job/pipeline when we say call another pieline ?
+    }
+
+    post {
+        always {
+            script {
+                echo 'Printing'
+            }
+        }
+        success {
+            script {
+                echo 'Success'
+            }
+        }
+        failure {
+            script {
+                echo 'Failed'
+            }
+        }
+        cleanup {
+            script {
+                sh ("rm -rf *.*")
             }
         }
     }
