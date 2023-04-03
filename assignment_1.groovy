@@ -37,6 +37,16 @@ pipeline {
             }
         }
 
+        stage('') {
+            steps {
+                script {
+                    try {
+                        sh('python test.py')
+                    }
+                }
+            }
+        }
+
         stage('Call pipeline_1') {
             steps {
                 script {
