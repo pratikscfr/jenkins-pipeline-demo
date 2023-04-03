@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh('python test.py')
+                        sh('python3 test.py')
                     } catch (Exception e) {
                         error ("Fatal")
                     }
