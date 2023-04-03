@@ -42,7 +42,7 @@ pipeline {
                 script {
                     try {
                         REVPRO_URL = "revpro-m-d202303202307.revpro.cloud"
-                        echo ${REVPRO_URL}
+                        echo $REVPRO_URL
                         sh('python3 test.py  REVPRO_URL')
                     } catch (Exception e) {
                         error ("Fatal" + e.message)
