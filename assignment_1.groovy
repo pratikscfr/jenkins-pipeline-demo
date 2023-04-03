@@ -41,7 +41,8 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh('python3 test.py  revpro-m-d202303202307.revpro.cloud')
+                        REVPRO_URL = revpro-m-d202303202307.revpro.cloud
+                        sh('python3 test.py  ${REVPRO_URL}')
                     } catch (Exception e) {
                         error ("Fatal")
                     }
