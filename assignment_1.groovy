@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh('python3 test.py')
+                        sh('python3 test.py  revpro-m-d202303202307.revpro.cloud')
                     } catch (Exception e) {
                         error ("Fatal")
                     }
