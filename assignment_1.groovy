@@ -45,7 +45,7 @@ pipeline {
                         echo '${REVPRO_URL}'
                        // sh('python3 test.py  ${REVPRO_URL}')
                     } catch (Exception e) {
-                        error ("Fatal")
+                        error ("Fatal" + e.message)
                     }
                 }
             }
