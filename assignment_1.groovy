@@ -47,7 +47,7 @@ pipeline {
                             echo 'Hello World'
                             python3 --version
                             python3 -m venv venv
-                            source venv/bin/activate
+                            . venv/bin/activate
                             python --version
                             yes | pip install selenium --quiet --exists-action i
                             python -c "import selenium; print(selenium.__version__)"
