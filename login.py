@@ -13,12 +13,12 @@ time.sleep(5)
 # find the element where we have to
 # enter the xpath
 # fill the number or mail
-driver.find_element("xpath", '//*[@id="username"]').send_keys('Prat6ik')
+driver.find_element("xpath", '//*[@id="username"]').send_keys('Pratik')
 
 # find the element where we have to
 # enter the xpath
 # fill the password
-driver.find_element("xpath", '//*[@id="password"]').send_keys('F54wc7%3qfi')
+driver.find_element("xpath", '//*[@id="password"]').send_keys('F54wc%3qfi')
 
 # find the element log in
 # request using xpath
