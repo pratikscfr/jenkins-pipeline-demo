@@ -1,12 +1,15 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import time
 
 
 
 postLogin_actual_Url="https://revpro2-devops-angdb01.revpro.cloud/#/dashboard/home"
 # create instance of Chrome webdriver
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
+# create instance of remote Chrome webdriver
+driver = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
 driver.get("https://revpro2-devops-angdb01.revpro.cloud/#/account/login")
 time.sleep(5)
 
