@@ -43,7 +43,15 @@ pipeline {
                     try {
                         def REVPRO_URL = "revpro-m-d202303202307.revpro.cloud"
                         echo "${REVPRO_URL}"
-                        sh("python3 test.py --URL \"${REVPRO_URL}\" ")
+                        sh """
+                            echo 'Hello World'
+                            python3 --version
+                            python3 -m venv venv
+                            source venv/bin/activate
+                            python --version
+                            deactivate
+                            rm -r venv
+                        """
                     } catch (Exception e) {
                         error ("Fatal: " + e.message)
                     }
