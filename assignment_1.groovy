@@ -51,6 +51,7 @@ pipeline {
                             python --version
                             yes | pip install selenium --quiet --exists-action i
                             python -c "import selenium; print(selenium.__version__)"
+                            python test.py \"${REVPRO_URL}\"
                             pip uninstall --yes selenium
                             deactivate
                             rm -r venv
