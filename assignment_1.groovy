@@ -49,6 +49,10 @@ pipeline {
                             python3 -m venv venv
                             source venv/bin/activate
                             python --version
+                            pip install selenium
+                            python -c "import selenium; print(selenium.__version__)"
+                            pip uninstall selenium
+                            python -c "import selenium; print(selenium.__version__)"
                             deactivate
                             rm -r venv
                         """
