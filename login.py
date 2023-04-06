@@ -7,7 +7,7 @@ import time
 
 postLogin_actual_Url="https://revpro2-devops-angdb01.revpro.cloud/#/dashboard/home"
 # create instance of Chrome webdriver
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(r"chromedriver")
 # create instance of remote Chrome webdriver
 # driver = webdriver.Remote("http://127.0.0.1:4444/wd/hub", DesiredCapabilities.CHROME)
 driver.get("https://revpro2-devops-angdb01.revpro.cloud/#/account/login")
